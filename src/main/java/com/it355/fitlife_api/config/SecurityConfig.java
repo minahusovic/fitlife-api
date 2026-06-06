@@ -59,13 +59,12 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/obroci/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/obroci/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/obroci/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
-
-                        .requestMatchers(HttpMethod.POST, "/api/obroci/{obrokId}/stavke").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/stavke-obroka/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
 
                         .requestMatchers(HttpMethod.GET, "/api/treninzi/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                         .requestMatchers(HttpMethod.POST, "/api/treninzi/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/treninzi/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/stavke-treninga/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
 
                         .requestMatchers("/api/users/**").hasAuthority("ROLE_ADMIN")
 
