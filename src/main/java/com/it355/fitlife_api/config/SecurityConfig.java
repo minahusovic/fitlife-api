@@ -39,6 +39,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
                         .requestMatchers("/api/auth/register").permitAll()
                         .requestMatchers("/api/auth/login").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
@@ -55,6 +56,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/api/vezbe/**").hasAuthority("ROLE_ADMIN")
 
                         .requestMatchers("/api/users/**").hasAuthority("ROLE_ADMIN")
+
+                        .requestMatchers("/api/obroci/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                        .requestMatchers("/api/stavke-obroka/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
 
                         .anyRequest().authenticated()
                 )

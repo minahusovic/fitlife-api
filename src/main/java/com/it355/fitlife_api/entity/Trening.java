@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "treninzi")
@@ -30,6 +31,7 @@ public class Trening {
     @JoinColumn(name = "user_id")
     private User user;
 
+   @JsonIgnore
     @OneToMany(mappedBy = "trening", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<StavkaTreninga> stavke = new ArrayList<>();
 
