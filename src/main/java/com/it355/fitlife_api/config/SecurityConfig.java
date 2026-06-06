@@ -38,6 +38,7 @@ public class SecurityConfig {
                 .headers(headers -> headers.frameOptions(frame -> frame.disable()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
                         .requestMatchers("/api/auth/register").permitAll()
@@ -55,10 +56,18 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/vezbe/**").hasAuthority("ROLE_ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/vezbe/**").hasAuthority("ROLE_ADMIN")
 
-                        .requestMatchers("/api/users/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/obroci/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/obroci/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/obroci/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
 
-                        .requestMatchers("/api/obroci/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
-                        .requestMatchers("/api/stavke-obroka/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/obroci/{obrokId}/stavke").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/stavke-obroka/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+
+                        .requestMatchers(HttpMethod.GET, "/api/treninzi/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/treninzi/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/api/treninzi/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+
+                        .requestMatchers("/api/users/**").hasAuthority("ROLE_ADMIN")
 
                         .anyRequest().authenticated()
                 )
