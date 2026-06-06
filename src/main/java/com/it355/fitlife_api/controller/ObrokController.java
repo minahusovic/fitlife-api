@@ -39,6 +39,11 @@ public class ObrokController {
         return ResponseEntity.ok(obrokService.create(request));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Obrok> update(@PathVariable Long id, @RequestBody ObrokRequest request) {
+        return ResponseEntity.ok(obrokService.update(id, request));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         obrokService.delete(id);

@@ -53,6 +53,21 @@ public class ObrokService {
     }
 
     @Transactional
+    public Obrok update(Long id, ObrokRequest request) {
+        Obrok obrok = getById(id);
+
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(() -> new RuntimeException("Korisnik nije pronađen."));
+
+        obrok.setNaziv(request.getNaziv());
+        obrok.setDatum(request.getDatum());
+        obrok.setTipObroka(request.getTipObroka());
+        obrok.setUser(user);
+
+        return obrokRepository.save(obrok);
+    }
+
+    @Transactional
     public void delete(Long id) {
         Obrok obrok = getById(id);
         obrokRepository.delete(obrok);

@@ -39,6 +39,11 @@ public class TreningController {
         return ResponseEntity.ok(treningService.create(request));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Trening> update(@PathVariable Long id, @RequestBody TreningRequest request) {
+        return ResponseEntity.ok(treningService.update(id, request));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         treningService.delete(id);

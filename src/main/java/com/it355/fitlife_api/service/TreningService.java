@@ -56,6 +56,24 @@ public class TreningService {
     }
 
     @Transactional
+    public Trening update(Long id, TreningRequest request) {
+        Trening trening = getById(id);
+
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(() -> new RuntimeException("Korisnik nije pronađen."));
+
+        trening.setNaziv(request.getNaziv());
+        trening.setDatum(request.getDatum());
+        trening.setTipTreninga(request.getTipTreninga());
+        trening.setTrajanjeMinuta(request.getTrajanjeMinuta());
+        trening.setPotroseneKalorije(request.getPotroseneKalorije());
+        trening.setNapomena(request.getNapomena());
+        trening.setUser(user);
+
+        return treningRepository.save(trening);
+    }
+
+    @Transactional
     public void delete(Long id) {
         Trening trening = getById(id);
         treningRepository.delete(trening);
