@@ -66,6 +66,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/api/treninzi/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/stavke-treninga/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
 
+                        .requestMatchers(HttpMethod.GET, "/api/statistika/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+
                         .requestMatchers("/api/users/**").hasAuthority("ROLE_ADMIN")
 
                         .anyRequest().authenticated()
